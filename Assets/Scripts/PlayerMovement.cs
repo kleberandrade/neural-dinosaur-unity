@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Jump && m_IsGrounded)
         {
+            Jump = false;
             var force = Vector3.up * m_JumpForce;
             m_Body.velocity = Vector3.zero;
             m_Body.AddForce(force, ForceMode.Impulse);

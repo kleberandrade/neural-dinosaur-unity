@@ -4,20 +4,22 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
 public class Brain : MonoBehaviour
 {
-    public float m_MaxDistance = 6.0f;
-    public float m_MaxSize = 27.0f;
-
     public LayerMask m_ObstacleMask;
 
-    public bool m_UseNet = true;
-
     [Header("Sensors")]
-    public float m_Distance;
-    public float m_Size;
+    public float m_MaxDistance = 6.0f;
+    public float m_MaxSize = 27.0f;
+    private float m_Distance;
+    private float m_Size;
 
     private PlayerMovement m_Player;
     private NeuralNetwork m_Net;
-    private List<SampleData> m_Samples = new List<SampleData>();
+
+    [Header("Train")]
+    public bool m_UseNet = true;
+    public float m_Accuracy = 0.000001f;
+    public int m_Epochs = 10;
+    public List<SampleData> m_Samples = new List<SampleData>();
 
     public void Awake()
     {
@@ -35,25 +37,39 @@ public class Brain : MonoBehaviour
 
     public void Update()
     {
+        UpdateSensorsData();
         UpdateInputMap();
+
         if (m_UseNet)
         {
-            UpdateSensorsData();
-            Decision();
+            var inputs = new float[3] { m_Distance, m_Size, -1.0f };
+            var output = m_Net.Calculate(inputs);
+            m_Player.Jump = output == 1;
         }
         else
         {
-            m_Player.Jump = Input.GetButton("Fire1");
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                m_Player.Jump = true;
+                SaveSample(1.0f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                SaveSample(0.0f);
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                StartCoroutine(m_Net.Train(m_Samples, m_Accuracy, m_Epochs));
+            }
         }
     }
 
-    public void Decision()
+    public void SaveSample(float output)
     {
         var inputs = new float[3] { m_Distance, m_Size, -1.0f };
-        var output = m_Net.Calculate(inputs);
-        var jump = output == 1;
-
-        m_Player.Jump = jump;
+        m_Samples.Add(new SampleData(inputs, output));
     }
 
     public void ClearSensorsData()

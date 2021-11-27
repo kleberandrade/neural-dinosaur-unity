@@ -601,6 +601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dino
       objectReference: {fileID: 0}
+    - target: {fileID: 516854137106871984, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
+      propertyPath: m_UseNet
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1361475753194028037, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
       propertyPath: m_JumpForce
       value: 20

@@ -42,6 +42,7 @@ public class NeuralNetwork
 
         do
         {
+            totalError = 0.0f;
             foreach (var sample in samples)
             {
                 float output = Calculate(sample.inputs);
