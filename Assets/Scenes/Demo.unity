@@ -242,7 +242,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735862102}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a325444a600aa4193991567513e50eda, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -601,29 +601,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dino
       objectReference: {fileID: 0}
-    - target: {fileID: 305790008128656573, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 516854137106871984, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
-      propertyPath: m_UseNet
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 516854137106871984, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
-      propertyPath: m_MaxDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 516854137106871984, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
-      propertyPath: m_ObstacleMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
     - target: {fileID: 1361475753194028037, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
       propertyPath: m_JumpForce
-      value: 1.5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1361475753194028037, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
-      propertyPath: m_GroundDistance
-      value: 0.01
+      propertyPath: m_GravityForce
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3267526311328113032, guid: eb028e9114037498db283f6a40f4d2e6, type: 3}
       propertyPath: m_RootOrder

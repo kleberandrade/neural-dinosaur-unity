@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -16,6 +17,7 @@ public class Brain : MonoBehaviour
 
     private PlayerMovement m_Player;
     private NeuralNetwork m_Net;
+    private List<SampleData> m_Samples = new List<SampleData>();
 
     public void Awake()
     {
@@ -23,8 +25,17 @@ public class Brain : MonoBehaviour
         m_Player = GetComponent<PlayerMovement>();
     }
 
+    public void UpdateInputMap()
+    {
+        if (Input.GetKeyDown(KeyCode.T)) m_UseNet = false;
+        if (Input.GetKeyDown(KeyCode.P)) m_UseNet = true;
+        if (Input.GetKeyDown(KeyCode.N)) m_Net = new NeuralNetwork(3);
+        if (Input.GetKeyDown(KeyCode.R)) m_Samples.Clear();
+    }
+
     public void Update()
     {
+        UpdateInputMap();
         if (m_UseNet)
         {
             UpdateSensorsData();
@@ -32,7 +43,7 @@ public class Brain : MonoBehaviour
         }
         else
         {
-            m_Player.Jump = Input.GetButton("Jump");
+            m_Player.Jump = Input.GetButton("Fire1");
         }
     }
 
